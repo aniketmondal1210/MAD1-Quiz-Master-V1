@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Quiz Master{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+      <div class="card shadow-lg border-0 rounded-lg">
+          <div class="card-header bg-primary text-white text-center">
+              <h1 class="display-4">Welcome to Quiz Master</h1>
+              <p class="lead">Your ultimate quiz preparation platform</p>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-md-6 text-center mb-4">
+                      <div class="card h-100 border-primary">
+                          <div class="card-body d-flex flex-column justify-content-between">
+                              <div>
+                                  <h3 class="card-title">Already a User?</h3>
+                                  <p class="card-text">Login to access your dashboard and take quizzes</p>
+                              </div>
+                              <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Login</a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 text-center mb-4">
+                      <div class="card h-100 border-success">
+                          <div class="card-body d-flex flex-column justify-content-between">
+                              <div>
+                                  <h3 class="card-title">New User?</h3>
+                                  <p class="card-text">Register to start your quiz journey</p>
+                              </div>
+                              <a href="{{ url_for('register') }}" class="btn btn-success btn-lg">Register</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer text-center">
+              <p>Quiz Master - Your ultimate quiz preparation platform</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Add sections for the new navigation items -->
+<section id="services" class="mt-5">
+    <div class="custom-card">
+        <div class="card-header-primary">
+            <h2 class="mb-0"><i class="bi bi-gear-fill me-2"></i>Our Services</h2>
+        </div>
+        <div class="p-4">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <i class="bi bi-journal-check" style="font-size: 3rem; color: var(--primary-color);"></i>
+                        <h4 class="mt-3">Interactive Quizzes</h4>
+                        <p>Engage with our interactive quizzes designed to test and improve your knowledge.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <i class="bi bi-graph-up" style="font-size: 3rem; color: var(--secondary-color);"></i>
+                        <h4 class="mt-3">Progress Tracking</h4>
+                        <p>Monitor your performance and track your improvement over time.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <i class="bi bi-trophy" style="font-size: 3rem; color: var(--accent-color);"></i>
+                        <h4 class="mt-3">Certifications</h4>
+                        <p>Earn certificates upon successful completion of quiz series.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="mt-5">
+    <div class="custom-card">
+        <div class="card-header-secondary">
+            <h2 class="mb-0"><i class="bi bi-stars me-2"></i>Key Features</h2>
+        </div>
+        <div class="p-4">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-lightning-charge-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
+                        </div>
+                        <div>
+                            <h4>Instant Feedback</h4>
+                            <p>Get immediate results and explanations for each question.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-phone-fill" style="font-size: 2rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <div>
+                            <h4>Mobile Friendly</h4>
+                            <p>Access quizzes on any device, anytime, anywhere.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-shield-check" style="font-size: 2rem; color: var(--accent-color);"></i>
+                        </div>
+                        <div>
+                            <h4>Secure Platform</h4>
+                            <p>Your data and progress are securely stored and protected.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-people-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
+                        </div>
+                        <div>
+                            <h4>Community Support</h4>
+                            <p>Join a community of learners and share your knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="our-work" class="mt-5 mb-5">
+    <div class="custom-card">
+        <div class="card-header-accent">
+            <h2 class="mb-0"><i class="bi bi-briefcase-fill me-2"></i>Our Work</h2>
+        </div>
+        <div class="p-4">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/Educational Institutions.png') }}" class="card-img-top" alt="Educational Institutions" style="height: 200px; object-fit: contain; padding: 20px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Educational Institutions</h5>
+                            <p class="card-text">We've helped schools and universities implement effective quiz systems by our work.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/Corporate Training.jpg') }}" class="card-img-top" alt="Corporate Training" style="height: 200px; object-fit: contain; padding: 20px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Corporate Training</h5>
+                            <p class="card-text">Our platform is used by companies for employee training and assessment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/Certification Programs.jpg') }}" class="card-img-top" alt="Certification Programs" style="height: 200px; object-fit: contain; padding: 20px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Certification Programs</h5>
+                            <p class="card-text">We provide quiz infrastructure for professional certification programs, ensuring smooth assessments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
