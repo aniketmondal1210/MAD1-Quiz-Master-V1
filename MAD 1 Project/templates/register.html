@@ -4,89 +4,89 @@
 
 {% block content %}
 <div class="row justify-content-center">
-  <div class="col-md-8 col-lg-6">
-      <div class="custom-card animate-fade-in">
-          <div class="card-header-primary">
-              <h2 class="text-center mb-0"><i class="bi bi-person-plus-fill me-2"></i>Join Quiz Master</h2>
-          </div>
-          <div class="p-4 p-md-5">
-              <p class="text-center mb-4">Create your account to start your quiz journey</p>
-              
-              <form method="POST">
-                  <div class="mb-4">
-                      <label for="email" class="form-label">Email Address</label>
-                      <div class="input-group">
-                          <span class="input-group-text bg-white border-end-0">
-                              <i class="bi bi-envelope"></i>
-                          </span>
-                          <input type="email" class="custom-form-control border-start-0" id="email" name="email" placeholder="your.email@example.com" required>
-                      </div>
-                  </div>
-                  
-                  <div class="mb-4">
-                      <label for="password" class="form-label">Password</label>
-                      <div class="input-group">
-                          <span class="input-group-text bg-white border-end-0">
-                              <i class="bi bi-lock"></i>
-                          </span>
-                          <input type="password" class="custom-form-control border-start-0" id="password" name="password" placeholder="Create a strong password" required>
-                      </div>
-                  </div>
-                  
-                  <div class="mb-4">
-                      <label for="full_name" class="form-label">Full Name</label>
-                      <div class="input-group">
-                          <span class="input-group-text bg-white border-end-0">
-                              <i class="bi bi-person"></i>
-                          </span>
-                          <input type="text" class="custom-form-control border-start-0" id="full_name" name="full_name" placeholder="Your full name" required>
-                      </div>
-                  </div>
-                  
-                  <div class="mb-4">
-                      <label class="form-label">Select Your Role</label>
-                      <div class="role-selection">
-                          <input type="radio" id="role_user" name="role" value="user" required checked class="role-radio">
-                          <label for="role_user" class="role-option role-option-user">
-                              <img src="{{ url_for('static', filename='images/User Logo.jpg') }}" alt="User" class="role-image">
-                              <div class="role-title">Student</div>
-                              <div class="role-description">Take quizzes and track your progress</div>
-                          </label>
-                          
-                          <input type="radio" id="role_admin" name="role" value="admin" required class="role-radio">
-                          <label for="role_admin" class="role-option role-option-admin">
-                              <img src="{{ url_for('static', filename='images/Administrator Logo.jpg') }}" alt="Admin" class="role-image">
-                              <div class="role-title">Administrator</div>
-                              <div class="role-description">Create and manage quizzes</div>
-                          </label>
-                      </div>
-                  </div>
-                  
-                  <div class="mb-4" id="admin_code_container">
-                      <label for="admin_code" class="form-label">Admin Access Code</label>
-                      <div class="input-group">
-                          <span class="input-group-text bg-white border-end-0">
-                              <i class="bi bi-shield-lock"></i>
-                          </span>
-                          <input type="password" class="custom-form-control border-start-0" id="admin_code" name="admin_code" placeholder="Enter admin access code">
-                      </div>
-                      <div class="form-text text-info mt-2">
-                          <i class="bi bi-info-circle me-1"></i>Use code "admin123" for admin registration during development.
-                      </div>
-                  </div>
-                  
-                  <div class="d-grid gap-2 mt-5">
-                      <button type="submit" class="btn btn-custom-primary py-3">
-                          <i class="bi bi-check-circle me-2"></i>Create Account
-                      </button>
-                  </div>
-              </form>
-          </div>
-          <div class="p-4 text-center bg-light">
-              <p class="mb-0">Already have an account? <a href="{{ url_for('login') }}" class="text-decoration-none fw-bold">Login here</a></p>
-          </div>
-      </div>
-  </div>
+    <div class="col-md-8 col-lg-6">
+        <div class="custom-card animate-fade-in">
+            <div class="card-header-primary">
+                <h2 class="text-center mb-0"><i class="bi bi-person-plus-fill me-2"></i>Join Quiz Master</h2>
+            </div>
+            <div class="p-4 p-md-5">
+                <p class="text-center mb-4">Create your account to start your quiz journey</p>
+                
+                <form method="POST">
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="email" class="custom-form-control border-start-0" id="email" name="email" placeholder="your.email@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password" class="custom-form-control border-start-0" id="password" name="password" placeholder="Create a strong password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="full_name" class="form-label">Full Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text" class="custom-form-control border-start-0" id="full_name" name="full_name" placeholder="Your full name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Select Your Role</label>
+                        <div class="role-selection">
+                            <input type="radio" id="role_user" name="role" value="user" required checked>
+                            <label for="role_user" class="role-option role-option-user">
+                                <img src="{{ url_for('static', filename='images/User Logo.jpg') }}" alt="User" class="role-image">
+                                <div class="role-title">Student</div>
+                                <div class="role-description">Take quizzes and track your progress</div>
+                            </label>
+                            
+                            <input type="radio" id="role_admin" name="role" value="admin" required>
+                            <label for="role_admin" class="role-option role-option-admin">
+                                <img src="{{ url_for('static', filename='images/Administrator Logo.jpg') }}" alt="Admin" class="role-image">
+                                <div class="role-title">Administrator</div>
+                                <div class="role-description">Create and manage quizzes</div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4" id="admin_code_container" style="display: none;">
+                        <label for="admin_code" class="form-label">Admin Access Code</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-shield-lock"></i>
+                            </span>
+                            <input type="password" class="custom-form-control border-start-0" id="admin_code" name="admin_code" placeholder="Enter admin access code">
+                        </div>
+                        <div class="form-text text-info mt-2">
+                            <i class="bi bi-info-circle me-1"></i>Use code "admin123" for admin registration during development.
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-5">
+                        <button type="submit" class="btn btn-custom-primary py-3">
+                            <i class="bi bi-check-circle me-2"></i>Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="p-4 text-center bg-light">
+                <p class="mb-0">Already have an account? <a href="{{ url_for('login') }}" class="text-decoration-none fw-bold">Login here</a></p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -98,9 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const adminCodeContainer = document.getElementById('admin_code_container');
 
     function toggleAdminCode() {
-        const selectedRole = document.querySelector('input[name="role"]:checked').value;
-        adminCodeField.required = (selectedRole === 'admin');
-        adminCodeContainer.style.display = (selectedRole === 'admin') ? 'block' : 'none';
+        const selectedRole = document.querySelector('input[name="role"]:checked');
+        if (selectedRole) {
+            const isAdmin = selectedRole.value === 'admin';
+            adminCodeField.required = isAdmin;
+            adminCodeContainer.style.display = isAdmin ? 'block' : 'none';
+        }
     }
 
     roleRadios.forEach(radio => {
@@ -111,4 +114,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
-
