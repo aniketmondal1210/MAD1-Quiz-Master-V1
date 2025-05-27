@@ -48,14 +48,18 @@
                         <div class="role-selection">
                             <input type="radio" id="role_user" name="role" value="user" required checked>
                             <label for="role_user" class="role-option role-option-user">
-                                <img src="{{ url_for('static', filename='images/User Logo.jpg') }}" alt="User" class="role-image">
+                                <div class="role-icon">
+                                    <i class="bi bi-person-circle" style="font-size: 4rem; color: var(--info-color);"></i>
+                                </div>
                                 <div class="role-title">Student</div>
                                 <div class="role-description">Take quizzes and track your progress</div>
                             </label>
                             
                             <input type="radio" id="role_admin" name="role" value="admin" required>
                             <label for="role_admin" class="role-option role-option-admin">
-                                <img src="{{ url_for('static', filename='images/Administrator Logo.jpg') }}" alt="Admin" class="role-image">
+                                <div class="role-icon">
+                                    <i class="bi bi-shield-check" style="font-size: 4rem; color: var(--danger-color);"></i>
+                                </div>
                                 <div class="role-title">Administrator</div>
                                 <div class="role-description">Create and manage quizzes</div>
                             </label>
