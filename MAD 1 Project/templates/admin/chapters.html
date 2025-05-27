@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Chapters - {{ subject.name }} - Admin - Quiz Master{% endblock %}
+
+{% block content %}
+<div class="card shadow-lg border-0 rounded-lg mb-4">
+    <div class="card-header bg-danger text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Chapters for {{ subject.name }}</h2>
+            <div>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-light me-2">Dashboard</a>
+                <a href="{{ url_for('admin_subjects') }}" class="btn btn-outline-light me-2">Subjects</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-dark">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="mb-4">All Chapters</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for chapter in chapters %}
+                            <tr>
+                                <td>{{ chapter.id }}</td>
+                                <td>{{ chapter.name }}</td>
+                                <td>{{ chapter.description }}</td>
+                                <td>
+                                    <a href="{{ url_for('admin_quizzes', chapter_id=chapter.id) }}" class="btn btn-primary btn-sm">Quizzes</a>
+                                    <a href="{{ url_for('edit_chapter', chapter_id=chapter.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{ url_for('delete_chapter', chapter_id=chapter.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this chapter?')">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="mb-4">New Chapter</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description:</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Quiz - Admin - Quiz Master{% endblock %}
+
+{% block content %}
+<div class="card shadow-lg border-0 rounded-lg mb-4">
+    <div class="card-header bg-success text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Create New Quiz</h2>
+            <div>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-light me-2">Dashboard</a>
+                <a href="{{ url_for('all_quizzes') }}" class="btn btn-outline-light me-2">All Quizzes</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-dark">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="subject_id" class="form-label">Subject:</label>
+                                <select class="form-select" id="subject_id" name="subject_id" required>
+                                    <option value="">Select Subject</option>
+                                    {% for subject in subjects %}
+                                    <option value="{{ subject.id }}">{{ subject.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="chapter_id" class="form-label">Chapter:</label>
+                                <select class="form-select" id="chapter_id" name="chapter_id" required disabled>
+                                    <option value="">Select Chapter</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Date:</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="duration" class="form-label">Duration (HH:MM):</label>
+                                <input type="text" class="form-control" id="duration" name="duration" placeholder="00:30" pattern="[0-9]{2}:[0-9]{2}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="remarks" class="form-label">Remarks:</label>
+                                <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success">Create Quiz</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const subjectSelect = document.getElementById('subject_id');
+        const chapterSelect = document.getElementById('chapter_id');
+        
+        // Function to populate chapters based on selected subject
+        function populateChapters(subjectId) {
+            // Clear chapter dropdown
+            chapterSelect.innerHTML = '<option value="">Select Chapter</option>';
+            
+            if (!subjectId) {
+                chapterSelect.disabled = true;
+                return;
+            }
+            
+            // Make AJAX request to get chapters for the selected subject
+            fetch(`/api/chapters/${subjectId}`)
+                .then(response => response.json())
+                .then(chapters => {
+                    if (chapters.length === 0) {
+                        const option = document.createElement('option');
+                        option.textContent = 'No chapters available for this subject';
+                        chapterSelect.appendChild(option);
+                        chapterSelect.disabled = true;
+                    } else {
+                        chapters.forEach(chapter => {
+                            const option = document.createElement('option');
+                            option.value = chapter.id;
+                            option.textContent = chapter.name;
+                            chapterSelect.appendChild(option);
+                        });
+                        chapterSelect.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching chapters:', error);
+                    const option = document.createElement('option');
+                    option.textContent = 'Error loading chapters';
+                    chapterSelect.appendChild(option);
+                    chapterSelect.disabled = true;
+                });
+        }
+        
+        // Update chapters when subject changes
+        subjectSelect.addEventListener('change', function() {
+            const subjectId = this.value;
+            populateChapters(subjectId);
+        });
+    });
+</script>
+{% endblock %}

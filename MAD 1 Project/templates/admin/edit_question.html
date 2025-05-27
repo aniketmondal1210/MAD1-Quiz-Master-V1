@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Question - Admin - Quiz Master{% endblock %}
+
+{% block content %}
+<div class="card shadow-lg border-0 rounded-lg mb-4">
+    <div class="card-header bg-danger text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Edit Question</h2>
+            <div>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-light me-2">Dashboard</a>
+                <a href="{{ url_for('admin_questions', quiz_id=question.quiz_id) }}" class="btn btn-outline-light me-2">Questions</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-dark">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="question_text" class="form-label">Question Text:</label>
+                                <textarea class="form-control" id="question_text" name="question_text" rows="3" required>{{ question.question_text }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option1" class="form-label">Option 1:</label>
+                                <input type="text" class="form-control" id="option1" name="option1" value="{{ question.option1 }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option2" class="form-label">Option 2:</label>
+                                <input type="text" class="form-control" id="option2" name="option2" value="{{ question.option2 }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option3" class="form-label">Option 3:</label>
+                                <input type="text" class="form-control" id="option3" name="option3" value="{{ question.option3 }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option4" class="form-label">Option 4:</label>
+                                <input type="text" class="form-control" id="option4" name="option4" value="{{ question.option4 }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="correct_option" class="form-label">Correct Option:</label>
+                                <select class="form-select" id="correct_option" name="correct_option" required>
+                                    <option value="1" {% if question.correct_option == 1 %}selected{% endif %}>Option 1</option>
+                                    <option value="2" {% if question.correct_option == 2 %}selected{% endif %}>Option 2</option>
+                                    <option value="3" {% if question.correct_option == 3 %}selected{% endif %}>Option 3</option>
+                                    <option value="4" {% if question.correct_option == 4 %}selected{% endif %}>Option 4</option>
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ url_for('admin_questions', quiz_id=question.quiz_id) }}" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
