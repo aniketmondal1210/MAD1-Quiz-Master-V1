@@ -5,7 +5,9 @@
 {% block content %}
 <div class="welcome-banner animate-fade-in">
     <div class="d-flex align-items-center">
-        <img src="{{ url_for('static', filename='images/User Logo.jpg') }}" alt="User" class="me-3" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid white;">
+        <div class="me-3" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid white; background-color: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;">
+            <i class="bi bi-person-circle" style="font-size: 2rem; color: white;"></i>
+        </div>
         <div>
             <h2>Welcome, {{ user.full_name }}!</h2>
             <p class="mb-0">Ready to test your knowledge? Start a quiz below.</p>
@@ -108,15 +110,23 @@
                                 </div>
                                 <p class="mb-2">{{ score.quiz.chapter.name }}</p>
                                 <div class="progress mb-2" style="height: 10px;">
-                                    <div class="progress-bar bg-success" role="progressbar" 
-                                         style="width: {{ (score.score / score.total_questions) * 100 }}%;" 
-                                         aria-valuenow="{{ (score.score / score.total_questions) * 100 }}" 
-                                         aria-valuemin="0" 
-                                         aria-valuemax="100"></div>
+                                    {% if score.total_questions > 0 %}
+                                        <div class="progress-bar bg-success" role="progressbar" 
+                                             style="width: {% if score.total_questions > 0 %}{{ (score.score / score.total_questions) * 100 }}{% else %}0{% endif %}%;" 
+                                             aria-valuenow="{% if score.total_questions > 0 %}{{ (score.score / score.total_questions) * 100 }}{% else %}0{% endif %}" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100"></div>
+                                    {% else %}
+                                        <div class="progress-bar bg-secondary" role="progressbar" 
+                                             style="width: 0%;" 
+                                             aria-valuenow="0" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100"></div>
+                                    {% endif %}
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <span>Score: {{ score.score }}/{{ score.total_questions }}</span>
-                                    <span>{{ ((score.score / score.total_questions) * 100)|round|int }}%</span>
+                                    <span>{% if score.total_questions > 0 %}{{ ((score.score / score.total_questions) * 100)|round|int }}%{% else %}0%{% endif %}</span>
                                 </div>
                             </div>
                         </div>
@@ -154,13 +164,21 @@
             <div class="stat-item">
                 <div class="stat-label">Average Score</div>
                 <div class="stat-value">
-                    {% if user.scores %}
+                    {% if user.scores and user.scores|length > 0 %}
                         {% set total_percentage = 0 %}
+                        {% set valid_scores = 0 %}
                         {% for score in user.scores %}
-                            {% set percentage = (score.score / score.total_questions) * 100 %}
-                            {% set total_percentage = total_percentage + percentage %}
+                            {% if score.total_questions > 0 %}
+                                {% set percentage = (score.score / score.total_questions) * 100 %}
+                                {% set total_percentage = total_percentage + percentage %}
+                                {% set valid_scores = valid_scores + 1 %}
+                            {% endif %}
                         {% endfor %}
-                        {{ (total_percentage / user.scores|length)|round|int }}%
+                        {% if valid_scores > 0 %}
+                            {{ (total_percentage / valid_scores)|round|int }}%
+                        {% else %}
+                            0%
+                        {% endif %}
                     {% else %}
                         N/A
                     {% endif %}
@@ -233,4 +251,3 @@
     </div>
 </div>
 {% endblock %}
-
