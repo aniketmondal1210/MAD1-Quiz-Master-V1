@@ -26,11 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     )
   })
 
-  // Add tooltips
-  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  tooltipTriggerList.map((tooltipTriggerEl) => {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  })
+  // Add tooltips if Bootstrap is available
+  const bootstrap = window.bootstrap // Declare the bootstrap variable
+  if (typeof bootstrap !== "undefined") {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.map((tooltipTriggerEl) => {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  }
 
   // Quiz timer
   const timerElement = document.getElementById("quiz-timer")
@@ -64,12 +67,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Role selection in registration
   const roleRadios = document.querySelectorAll('input[name="role"]')
   const adminCodeField = document.getElementById("admin_code")
+  const adminCodeContainer = document.getElementById("admin_code_container")
 
-  if (roleRadios.length && adminCodeField) {
+  if (roleRadios.length && adminCodeField && adminCodeContainer) {
     function toggleAdminCode() {
-      const selectedRole = document.querySelector('input[name="role"]:checked').value
-      adminCodeField.required = selectedRole === "admin"
-      adminCodeField.disabled = selectedRole !== "admin"
+      const selectedRole = document.querySelector('input[name="role"]:checked')
+      if (selectedRole) {
+        const isAdmin = selectedRole.value === "admin"
+        adminCodeField.required = isAdmin
+        adminCodeContainer.style.display = isAdmin ? "block" : "none"
+      }
     }
 
     roleRadios.forEach((radio) => {
